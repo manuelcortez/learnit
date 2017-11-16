@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import datetime
 
 def interval(repetition, rating, easy_factor=2.5):
 	""" SM2 algorithm: https://www.supermemo.com/english/ol/sm2.htm"""
