@@ -105,3 +105,20 @@ auth.settings.reset_password_requires_verification = True
 # after defining tables, uncomment below to enable auditing
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
+
+# define language table
+db.define_table("language",
+    Field("name", "string", unique=True, required=True, requires=IS_NOT_EMPTY(), readable=False, writable=False),
+    Field("code", "string", required=True, requires=IS_NOT_EMPTY(), readable=False, writable=False),
+    Field("localized_name", "string", required=True, requires=IS_NOT_EMPTY(), readable=False, writable=False))
+
+# Define card table.
+db.define_table("card",
+    Field("question", "text", required=True, requires=IS_NOT_EMPTY(), label="Question"),
+    Field("question_lang", "reference language", required=True),
+    Field("answer", "text", required=True, requires=IS_NOT_EMPTY(), label="Answer for this question"),
+    Field("answer_lang", "reference language", required=True),
+    Field("repetitions", "integer", default=0, required=True, readable=False, writable=False),
+    Field("easiness_factor", "double", default=2.5, required=True, readable=False, writable=False),
+    Field("next_practice", "date", default=request.now, required=True, readable=False, writable=False))
+
