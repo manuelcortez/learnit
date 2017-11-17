@@ -1,2 +1,4 @@
 # learnit
-A simple software to use spaced repetition
+
+A simple web application for learning a language thanks to spaced repetition.
+
