@@ -10,6 +10,7 @@ if re.compile('\w{2}(\-\w{2})?').match(request.vars.lang or ''):
     session.language=request.vars.lang
 if session.language:
    T.force(session.language)
+    T.is_writable = False
 #response.logo = ""
 
 response.title = request.application.replace('_', ' ').title()
