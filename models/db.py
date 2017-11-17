@@ -122,3 +122,7 @@ db.define_table("card",
     Field("easiness_factor", "double", default=2.5, required=True, readable=False, writable=False),
     Field("next_practice", "date", default=request.now, required=True, readable=False, writable=False))
 
+if db(db.language).count() == 0:
+    db.language.insert(name="English", code="en", localized_name="English")
+    db.language.insert(name="Spanish", code="es", localized_name="Español")
+    db.language.insert(name="Russian", code="ru", localized_name="Русский")
