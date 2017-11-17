@@ -13,7 +13,7 @@
           initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height
           user-scalable = yes allows the user to zoom in -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{=response.title or request.application}} | {{=T("TWBlue audio")}}</title>
+    <title>{{=response.title or request.application}}</title>
     <!-- http://dev.w3.org/html5/markup/meta.name.html -->
     <meta name="application-name" content="{{=request.application}}">
     <!-- Speaking of Google, don't forget to set your site up:
@@ -78,15 +78,6 @@
     {{end}}
     <!-- Main ========================================= -->
     <!-- Begin page content -->
-<section aria-label="{{=T("Change language")}}">          
-<h2>{{=T("Change language")}}</h2>
-<ul>
-{{for i in db(db.languages.id > 0).select():}}
-
-<li><a href="{{='%s://%s%s' % (request.env.wsgi_url_scheme, request.env.http_host, request.env.web2py_original_uri)}}?lang={{=i.code}}">{{=i.locale_name}}</a></li>
-{{pass}}
-</ul>
-</section>
 <main>
     <div class="container-fluid main-container">
 <h2>{{=response.title}}     </h2>
@@ -121,7 +112,6 @@ document.write(VK.Share.button(false, {type: 'link', text: 'Опубликова
 
     </div>
 <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-<a class="twitter-timeline" href="https://twitter.com/manuelcortez00">Tweets by manuelcortez00</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 {{pass}}
 </main>
     
