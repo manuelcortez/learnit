@@ -114,11 +114,12 @@ db.define_table("language",
 
 # Define card table.
 db.define_table("card",
-    Field("owner", "reference auth_user", required=True),
-    Field("question", "text", required=True, requires=IS_NOT_EMPTY(), label="Question"),
-    Field("question_lang", "reference language", required=True),
-    Field("answer", "text", required=True, requires=IS_NOT_EMPTY(), label="Answer for this question"),
-    Field("answer_lang", "reference language", required=True),
+    Field("owner", "reference auth_user", default=auth.user_id, required=True, readable=False, writable=False),
+    Field("word", "string", required=True, requires=IS_NOT_EMPTY(), label="Word"),
+    Field("word_lang", "string", required=True, label=T("Language for the given word"), requires=IS_IN_DB(db, db.language.localized_name)),
+    Field("answer", "string", required=True, requires=IS_NOT_EMPTY(), label="Meaning"),
+    Field("answer_lang", "string", required=True, label=T("Language for the given meaning"), requires=IS_IN_DB(db, db.language.localized_name)),
+    Field("word_audio", "upload", label=T("Sound")),
     Field("repetitions", "integer", default=0, required=True, readable=False, writable=False),
     Field("easiness_factor", "double", default=2.5, required=True, readable=False, writable=False),
     Field("next_practice", "date", default=request.now, required=True, readable=False, writable=False))

@@ -15,6 +15,19 @@ def download():
 	return response.download(request, db)
 
 def index():
-	response.title = "Learn It"
+	response.title = T("Learn It")
 	return dict()
 
+@auth.requires_login()
+def words():
+	response.title = T("My words")
+	words = db(db.card.owner == auth.user).select()
+	return dict(words=words)
+
+@auth.requires_login()
+def add_word():
+	response.title = T("Add word")
+	form = SQLFORM(db.card)
+	if form.process().accepted:
+		return redirect(URL("default", "words"))
+	return dict(form=form)
