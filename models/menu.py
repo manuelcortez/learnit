@@ -37,3 +37,6 @@ response.google_analytics_id = None
 response.menu = [
     (T('Home'), False, URL('default', 'index'), []),
 ]
+
+if auth.user:
+    response.menu.append((T('My words'), False, URL('default', 'words'), []))

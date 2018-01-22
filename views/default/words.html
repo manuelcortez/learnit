@@ -1,0 +1,24 @@
+{{share=False}}
+{{extend 'layout.html'}}
+
+{{block header}}
+    <header class="container-fluid background">
+      <div class="jumbotron text-center">
+      </div>
+    </header>
+
+{{end}}
+{{=A(T("Add word"), _href=URL("default", "add_word"))}}
+{{=P(T("Here you can see your wordlist, as well as some useful information about your practice."))}}
+{{if len(words) > 0:}}
+<table><caption>{{=T("Information related to your word list.")}}</caption><thead><tr><th>{{=T("Word")}}</th><th>{{=T("Meaning")}}</th><th>{{=T("Actions")}}</th></tr></thead>
+<tbody>
+{{for i in words:}}
+<tr><td>{{=i.word}}</td><td>{{=i.answer}}</td><td>{{=A(T("Edit"), _href=URL("default", "edit_word", vars=dict(word=i.id)))}}</td></tr>
+{{pass}}
+</tbody></table>
+
+{{else:}}
+{{=H2(T("No words, yet. Don't worry!"))}}
+{{=P(T("It seems you don't have words for practicing, yet. Take it easy! You can start adding your own list whenever you want."))}}
+{{pass}}
