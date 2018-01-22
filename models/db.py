@@ -114,6 +114,7 @@ db.define_table("language",
 
 # Define card table.
 db.define_table("card",
+    Field("owner", "reference auth_user", required=True),
     Field("question", "text", required=True, requires=IS_NOT_EMPTY(), label="Question"),
     Field("question_lang", "reference language", required=True),
     Field("answer", "text", required=True, requires=IS_NOT_EMPTY(), label="Answer for this question"),
@@ -122,7 +123,9 @@ db.define_table("card",
     Field("easiness_factor", "double", default=2.5, required=True, readable=False, writable=False),
     Field("next_practice", "date", default=request.now, required=True, readable=False, writable=False))
 
+# Let's add some langs if there are no records.
 if db(db.language).count() == 0:
     db.language.insert(name="English", code="en", localized_name="English")
     db.language.insert(name="Spanish", code="es", localized_name="Español")
     db.language.insert(name="Russian", code="ru", localized_name="Русский")
+
